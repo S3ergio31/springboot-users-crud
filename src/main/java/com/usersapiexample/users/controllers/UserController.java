@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.usersapiexample.users.models.User;
+import com.usersapiexample.users.models.UserDeleteStatus;
 import com.usersapiexample.users.services.UserService;
 
 @RestController
@@ -36,10 +37,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable Long id) {
-        if(this.userService.delete(id)) {
-            return "User with id=" + id.toString() + " has been deleted";
-        }
-        return "User with id=" + id.toString() + " cannot be deleted";
+    public UserDeleteStatus delete(@PathVariable Long id) {
+        return this.userService.delete(id);
     }
 }

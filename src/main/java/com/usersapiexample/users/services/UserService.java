@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.usersapiexample.users.models.User;
+import com.usersapiexample.users.models.UserDeleteStatus;
 import com.usersapiexample.users.repositories.UserRepository;
 
 @Service
@@ -33,13 +34,13 @@ public class UserService {
         return this.userRepository.findByEmail(email);
     }
 
-    public Boolean delete(Long id) {
+    public UserDeleteStatus delete(Long id) {
         try {
             this.userRepository.deleteById(id);
-            return true;
+            return UserDeleteStatus.deleted(id);
         }
         catch(Exception ex){
-            return false;
+            return UserDeleteStatus.notDeleted(id);
         }
     }
 }
