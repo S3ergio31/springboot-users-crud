@@ -1,6 +1,7 @@
 package com.usersapiexample.users.controllers;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +20,26 @@ public class UserController {
         return (ArrayList<User>) this.userService.all();
     }
 
-    @PostMapping("/save") 
+    @PostMapping() 
     public User save(@RequestBody User user){
         return this.userService.save(user);
+    }
+
+    @GetMapping("/{id}")
+    public Optional<User> find(@PathVariable Long id){
+        return this.userService.find(id);
+    }
+
+    @GetMapping("/query")
+    public ArrayList<User> findByEmail(@RequestParam String email) {
+        return (ArrayList<User>) this.userService.findByEmail(email);
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable Long id) {
+        if(this.userService.delete(id)) {
+            return "User with id=" + id.toString() + " has been deleted";
+        }
+        return "User with id=" + id.toString() + " cannot be deleted";
     }
 }

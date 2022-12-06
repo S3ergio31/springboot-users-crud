@@ -11,6 +11,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
+    private Integer level;
 
     public Long getId() {
         return this.id;
@@ -28,6 +29,10 @@ public class User {
         return this.email;
     }
 
+    public Integer getLevel(){
+        return this.level;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -42,6 +47,10 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setLevel(Integer level){
+        this.level = level;
     }
 
     
